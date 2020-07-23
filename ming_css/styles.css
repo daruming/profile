@@ -10799,6 +10799,15 @@ body {
   color: #64a19d;
 }
 
+.portfolio-details .portfolio-description h6 {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #64a19d;
+}
+
+
   
 .portfolio-details .portfolio-description h4::after{
 	    content: "";
@@ -10895,7 +10904,38 @@ section {
 /*--------------------------------------------------------------
 # thumgnail site33
 --------------------------------------------------------------*/
-.thumbnail iframe {
-  width: 1440px;
-  height: 900px;
+.fragment {
+    font-size: 12px;
+    border: 1px solid #ccc;
+    color: #555;
+    display: block;
+    padding: 20px;
+    box-sizing: border-box;
+    text-decoration: none; 
+    
 }
+
+.fragment:hover {
+    box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+
+}
+
+.fragment img { 
+	padding: 0px 20px 0px 0px;
+	position: absolute; 
+	max-width: 100%; 
+	height: 100%;
+}
+.fragment h3,
+.fragment h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.fragment h3 {
+    color: #369;
+}
+.fragment h4 {
+    color: #000;
+}
+
