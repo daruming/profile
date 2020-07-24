@@ -26,7 +26,7 @@
 
 
     </head>
-    <body id="page-top">
+    <body id="project">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
@@ -87,7 +87,7 @@
 										3. 미디어아트에 관련된 아이디어와 기획만으로 손쉽게 개발계획서 및 설계도를 작성할 수 있도록 함.</p>
 		          </div>
 		          <div class="row justify-content-center no-gutters mb-5 mb-lg-5">
-					<div class="col-lg-12 mx-auto"><img src="ming_assets/img/df14/df14-04.jpg" class="img-fluid" alt=""></div>
+					<div class="col-lg-12 mb-4 mb-lg-4 mx-auto"><img src="ming_assets/img/df14/df14-04.jpg" class="img-fluid" alt=""></div>
 					<div class="col-lg-4 mx-auto"><img class="img-fluid" src="ming_assets/img/df14/df14-06.jpg" alt="" /></div>
 		            <div class="col-lg-4 mx-auto"><img class="img-fluid" src="ming_assets/img/df14/df14-07.jpg" alt="" /></div>
 		            <div class="col-lg-4 mx-auto"><img class="img-fluid" src="ming_assets/img/df14/df14-08.jpg" alt="" /></div>
@@ -119,11 +119,116 @@
 			
 			<div class="portfolio-description">
 				<h2>PROJECT TECHNIQUE</h2>
-				<h4>PROCESSING을 이용한 텐저블 미디어아트 작품 프로그래밍</h4>
+				<h4>PROCESSING을 이용한 텐저블 미디어아트 작품 주요코드</h4>
 			    <div class="row justify-content-center no-gutters mb-5 mb-lg-5">
 					<div class="col-lg-6 mx-auto"><img src="ming_assets/img/df14/df14-11.png" class="img-fluid" alt=""></div>
 					<div class="col-lg-6 mx-auto"><img src="ming_assets/img/df14/df14-12.png" class="img-fluid" alt=""></div>
 			    </div>
+				<div class="featured-text mb-4 col-lg-12 mx-auto"><p class="mb-4 mb-lg-4 text-white">geomerative를 사용하여 알파벳을 만드는 코드</p></div>
+				<div class="mb-4 col-lg-11 mx-auto">
+					<pre><code>
+import processing.opengl.*;
+import geomerative.*;
+import java.util.Date;
+
+Particle p;
+ArrayList particles;
+
+RFont font;
+RShape s;
+float distMin=40;
+
+//New variables
+int mode;
+int onoff;
+String message;
+char word;
+
+void setup() {
+  size(640, 350, OPENGL);
+  smooth();
+  particles = new ArrayList();
+
+  //Init values
+  mode = 0;
+  onoff = 0;
+  message = "";
+}
+					</code>
+					</pre>
+				</div>
+
+				<div class="featured-text mb-4 col-lg-12 mx-auto"><p class="mb-4 mb-lg-4 text-white">geomerative를 사용하여 알파벳을 만드는 코드</p></div>
+				<div class="mb-4 col-lg-11 mx-auto">
+					<pre><code>
+void draw() {
+
+  translate(width/2, 275);
+  background(0);
+  fill(255, 50);
+  strokeWeight(0.3);
+  stroke(0, 255, 255, 50);
+
+  if (onoff == 1) {
+    message = message + word;
+    onoff = 0;
+  }
+  
+  if (mode == 1) {
+    RG.init(this);
+    RCommand.setSegmentLength(10);
+    font = new RFont("FreeSans.ttf", 273, RFont.CENTER);
+    RGroup maGroupe = font.toGroup(message);
+    RPoint[] points = maGroupe.getPoints();
+
+    for (int i=0;i points.length;i++) {
+      particles.add(new Particle(points[i].x, points[i].y, 3));
+    }
+
+    mode = 2;
+  }
+
+  if (mode == 2) {
+    for (int i=0;i&lt;particles.size();i++) {
+      Particle p = (Particle) particles.get(i);
+      p.draw();
+
+      float dpart=0;
+      for (int j =0;j&lt;particles.size();j++) {
+
+        Particle pj = (Particle)particles.get(j);
+        dpart = p.distance(pj);
+
+        if (dpart &lt;= distMin) {
+          line(p.x, p.y, pj.x, pj.y);
+        }
+      }
+    }
+  }
+}
+
+void keyPressed() {
+  //space bar : capture
+  if (key == ' ') {
+    saveFrame("captures/capture_"+(new Date().getTime())+".tiff");
+    println("save TIFF");
+  }
+  // enter : show char
+  else if (key == ENTER) {
+    mode = 1;
+  }
+  else if (41&lt;=key || key&lt;=90 || 97&lt;=key || key&lt;=122) {
+    onoff = 1;
+    word = char(key);
+  }
+  else if (key == 44) {
+    onoff = 1;
+    word = char(key);
+  }
+}
+
+					</code></pre>
+				</div>    
 				<p class="mb-4 text-white-50">Processing 3.0에서 Java언어를 사용하여 구현하였다. 특별한 점은, 마우스의 위치에 따라 점, 선으로 2차원 벡터 그래픽으로 구현하는 Geomerative 라이브러리를 이용하였다는 것이다. Geomerative를 응용하여 사용자가 원하는 위치에 원하는 글자를 벡터 그래픽으로 표현하는 코드를 완성하였다.</p>
 				<div class="row justify-content-center no-gutters mb-lg-5">	
 					<div class="col-lga-12 mx-auto"><img src="ming_assets/img/df14/Opening-symposium-final.gif" class="img-fluid" alt=""></div>
